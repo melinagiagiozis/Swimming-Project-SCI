@@ -54,7 +54,7 @@ To perform a comprehensive analysis of the extracted swimming parameters (as inc
 
 ## Contact 
 
-✉️ For comments or questions contact [Melina Giagiozis](Melina.Giagiozis@balgrist.ch).
+✉️ For comments or questions related to this repository or the manuscript contact [Melina Giagiozis](Melina.Giagiozis@balgrist.ch).
 
 ## Funding
 
