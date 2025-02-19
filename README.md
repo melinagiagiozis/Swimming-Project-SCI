@@ -58,10 +58,4 @@ To perform a comprehensive analysis of the extracted swimming parameters (as inc
 
 ## Funding
 
-This research was funded by the Swiss National Science Foundation (#PZ00P3_186101, Jutzeler and #IZLIZ3_200275, Curt), the Swiss Paraplegic Center, and Swiss Paraplegic Research.
-
-
-
-
-
-
+💰 This research was funded by the Swiss National Science Foundation (#PZ00P3_186101, Jutzeler and #IZLIZ3_200275, Curt), the Swiss Paraplegic Center, and Swiss Paraplegic Research.
