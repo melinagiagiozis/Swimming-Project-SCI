@@ -36,21 +36,21 @@ In `Scripts/config.py` change the paths for data, results, and figures based on 
 
 ## Datasets Preparation
 
-Download the pre-processed datasets into the `Data` folder located in the pre-defined path (data_path in `Scripts/config.py`).
+Download the pre-processed datasets into the `Data` folder located in the pre-defined path (`Scripts/config.py`).
 
 ## Extracting Swimming Parameters
 
-To first set up the healthy reference run `Scripts/create_healthy_reference.py`. The script will access the template in from `Data/Templates` and save it to `Data/Healthy_Reference_Data` located in the pre-defined path (data_path in `Scripts/config.py`).
+To first set up the healthy reference run `Scripts/create_healthy_reference.py`. The script will access the template in from `Data/Templates` and save it to `Data/Healthy_Reference_Data` located in the pre-defined path (`Scripts/config.py`).
 
-To extract the swimming parameters run `Scripts/main.py`. The script will use the templates in `Data/Templates` and save them to `Results` located in the pre-defined path (data_path in `Scripts/config.py`).
+To extract the swimming parameters run `Scripts/main.py`. The script will use the templates in `Data/Templates` and save them to `Results` located in the pre-defined path (`Scripts/config.py`).
 
 ## Validation
 
-To validate the sensor orientations against optical motion capture (VICON, Oxford, UK) run `Scripts/validation.py`. Figures will be saved to `Figures` located in the pre-defined path (data_path in `Scripts/config.py`).
+To validate the sensor orientations against optical motion capture (VICON, Oxford, UK) run `Scripts/validation.py`. Figures will be saved to `Figures` located in the pre-defined path (`Scripts/config.py`).
 
 ## Data Analysis
 
-To perform a comprehensive analysis of the extracted swimming parameters (as included in the publication [publication link]) run `Scripts/run_analysis.py`. This script conducts statistical analyses, visualizes the data, and applies k-means clustering for pattern identification. Figures will be saved to `Figures` located in the pre-defined path (data_path in `Scripts/config.py`).
+To perform a comprehensive analysis of the extracted swimming parameters (as included in the publication [publication link]) run `Scripts/run_analysis.py`. This script conducts statistical analyses, visualizes the data, and applies k-means clustering for pattern identification. Figures will be saved to `Figures` located in the pre-defined path (`Scripts/config.py`).
 
 ## Contact 
 
