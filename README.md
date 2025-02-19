@@ -30,7 +30,7 @@ Install python dependencies.
 pip install -r requirements.txt
 ```
 
-## Set up paths
+## Path Setup
 
 In `Scripts/config.py` change the paths for data, results, and figures based on the local setup.
 
