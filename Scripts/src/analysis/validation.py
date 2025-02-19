@@ -44,6 +44,7 @@ from src.swimming_algorithm import *
 from src.extract_parameters import *
 from src.functions import *
 from config import data_path, results_path, figures_path
+from src.healthy_reference import reference_data
 
 
 ############################### Functions ###############################
@@ -117,7 +118,7 @@ for participant in sorted(os.listdir(validation_data_dir)):
         # Extract swimming parameters and save them to csv files
         print('... Extracting swimming parameters')
         swimming_parameters = extract_swimming_parameters(swimming_data, results_path, 
-                                                          participant, participant, 
+                                                          participant, participant, reference_data,
                                                           create_files=False)
 
         # Start validation
