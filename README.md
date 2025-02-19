@@ -36,11 +36,11 @@ In `Scripts/config.py` change the paths for data, results, and figures based on 
 
 ## Datasets Preparation
 
-Download the pre-processed datasets into the `Data` folder located in the pre-defined path (`Scripts/config.py`).
+Ensure that the pre-processed datasets is in the `Data` folder located in the pre-defined path (`Scripts/config.py`).
 
 ## Extracting Swimming Parameters
 
-To first set up the healthy reference run `Scripts/create_healthy_reference.py`. The script will access the template in from `Data/Templates` and save it to `Data/Healthy_Reference_Data` located in the pre-defined path (`Scripts/config.py`).
+First, set up the healthy reference by running `Scripts/create_healthy_reference.py`. The script will access the template in `Data/Templates` and save it to `Data/Healthy_Reference_Data` located in the pre-defined path (`Scripts/config.py`).
 
 To extract the swimming parameters run `Scripts/main.py`. The script will use the templates in `Data/Templates` and save them to `Results` located in the pre-defined path (`Scripts/config.py`).
 
