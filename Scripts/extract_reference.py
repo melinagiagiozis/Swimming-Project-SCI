@@ -44,6 +44,10 @@ start_time = time.time()
 
 folder = "Healthy_Controls"
 
+# Create Healthy_Reference_Data folder if it does not yet exist
+reference_dir = os.path.join(data_path, "Healthy_Reference_Data")
+os.makedirs(os.path.dirname(reference_dir), exist_ok=True)
+
 if os.path.isdir(os.path.join(data_dir, folder)):
     
     # Create CSV files to save swimming parameters

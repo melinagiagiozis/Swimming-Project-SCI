@@ -24,9 +24,12 @@ Date: 2025-02-19
 """
 
 import os
+import sys
 import pandas as pd
-from config import data_path
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), './../')))
 from src.functions import calculate_mean_shape_centered
+from config import data_path
 
 # Load healthy reference data
 csv_file = 'Healthy_Reference_Data/Joint_Angles_Healthy_Controls.csv'
