@@ -1,6 +1,5 @@
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
-# for example: $ conda create --name wim --file requirements.txt
 # platform: osx-64
 ahrs=0.3.1=pypi_0
 ansitable=0.11.4=pypi_0
