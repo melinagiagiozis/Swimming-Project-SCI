@@ -213,8 +213,8 @@ def swimming_algorithm(sensor_data_dict, trial_times_dict):
     # Extract data per trial
     for trial in range(trial_nr):
         
-        x_starts.append(trial_times_dict['trial_times'].loc[trial][1].astype(float))
-        x_stops.append(trial_times_dict['trial_times'].loc[trial][2].astype(float))
+        x_starts.append(trial_times_dict['trial_times'].loc[trial].iloc[1].astype(float))
+        x_stops.append(trial_times_dict['trial_times'].loc[trial].iloc[2].astype(float))
 
         acc_per_segment = []
         gyro_per_segment = []

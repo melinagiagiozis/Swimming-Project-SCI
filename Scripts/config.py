@@ -15,13 +15,16 @@ Date: 2025-02-19
 import os
 
 # Path to where the data is stored locally
-data_path = '/Volumes/green_groups_bds_jumpusers/melina/1_Swimming/_Publication/Swimming-Project-SCI/Data'
+# data_path = '/Volumes/green_groups_bds_jumpusers/melina/1_Swimming/_Publication/Swimming-Project-SCI/Data'
+data_path = '/Users/melinagiagiozis/Documents/PhD/01_Projects/01_Swimming/SpecTra/Submission/Repo-to-Publish/Swimming-Project-SCI/Data'
 os.makedirs(data_path, exist_ok=True)
 
 # Path to where the results will be stored locally
-results_path = '/Volumes/green_groups_bds_jumpusers/melina/1_Swimming/_Publication/Swimming-Project-SCI/Results'
+# results_path = '/Volumes/green_groups_bds_jumpusers/melina/1_Swimming/_Publication/Swimming-Project-SCI/Results'
+results_path = '/Users/melinagiagiozis/Documents/PhD/01_Projects/01_Swimming/SpecTra/Submission/Repo-to-Publish/Swimming-Project-SCI/Results'
 os.makedirs(results_path, exist_ok=True)
 
 # Path to where the figures will be stored locally
-figures_path = '/Volumes/green_groups_bds_jumpusers/melina/1_Swimming/_Publication/Swimming-Project-SCI/Figures'
+# figures_path = '/Volumes/green_groups_bds_jumpusers/melina/1_Swimming/_Publication/Swimming-Project-SCI/Figures'
+figures_path = '/Users/melinagiagiozis/Documents/PhD/01_Projects/01_Swimming/SpecTra/Submission/Repo-to-Publish/Swimming-Project-SCI/Figures'
 os.makedirs(figures_path, exist_ok=True)

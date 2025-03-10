@@ -98,7 +98,7 @@ def perform_clustering():
     # Patients
     df_bl = distinguish_impaired_leg(df_bl, df_clinical, parameters)
 
-    df_bl = df_bl.groupby('Participant').mean()
+    df_bl = df_bl.groupby('Participant').mean(numeric_only=True)
 
     # Remove Trials
     df_bl = df_bl.drop('Trial', axis=1)
@@ -227,10 +227,11 @@ def perform_clustering():
 
         num_tests = len(unilateral_parameters)
         corrected_pvalue_main = min(p_value_main * num_tests, 1)  # Bonferroni correction
-        results_df_clusters = results_df_clusters.append({'Parameter': parameter, 
-                                                        'P-Value': p_value_main,
-                                                        'Corrected P-Value': corrected_pvalue_main}, 
-                                                        ignore_index=True)
+        new_row = pd.DataFrame([{'Parameter': parameter, 'P-Value': p_value_main, 'Corrected P-Value': corrected_pvalue_main}])
+        if results_df_clusters.empty:
+            results_df_clusters = new_row  # Assign directly if DataFrame is empty
+        else:
+            results_df_clusters = pd.concat([results_df_clusters, new_row], ignore_index=True)
     
     bilateral_parameters = ['RoM ankle (flexion/extension)', 'RoM knee (flexion/extension)', 
                             'RoM hip (flexion/extension)', 'RoM hip (abduction/adduction)',
@@ -267,10 +268,12 @@ def perform_clustering():
         
         num_tests = len(parameters)
         corrected_pvalue_main = min(p_value_main * num_tests, 1)  # Bonferroni correction
-        results_df_clusters = results_df_clusters.append({'Parameter': parameter, 
-                                                        'P-Value': p_value_main,
-                                                        'Corrected P-Value': corrected_pvalue_main}, 
-                                                        ignore_index=True)
+        results_df_clusters = pd.concat([results_df_clusters, 
+                                         pd.DataFrame([{'Parameter': parameter, 
+                                                'P-Value': p_value_main,
+                                                'Corrected P-Value': corrected_pvalue_main}])], 
+                                         ignore_index=True)
+
         
     # Multiple testing correction
     results_df_clusters = results_df_clusters.drop_duplicates().reset_index(drop=True)

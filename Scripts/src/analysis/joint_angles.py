@@ -63,19 +63,19 @@ def analyze_joint_angles():
     hip_add_abd_reference = healthy_reference[healthy_reference['Joint'] == 'Hip_add_abd']
 
     # Hip
-    hip_reference = hip_reference.groupby('Participant').mean()
+    hip_reference = hip_reference.groupby('Participant').mean(numeric_only=True)
     hip_reference.columns = [i+1 for i in range(100)]
 
     # Knee
-    knee_reference = knee_reference.groupby('Participant').mean()
+    knee_reference = knee_reference.groupby('Participant').mean(numeric_only=True)
     knee_reference.columns = [i+1 for i in range(100)]
 
     # Ankle
-    ankle_reference = ankle_reference.groupby('Participant').mean()
+    ankle_reference = ankle_reference.groupby('Participant').mean(numeric_only=True)
     ankle_reference.columns = [i+1 for i in range(100)]
 
     # Hip adduction/abduction
-    hip_add_abd_reference = hip_add_abd_reference.groupby('Participant').mean()
+    hip_add_abd_reference = hip_add_abd_reference.groupby('Participant').mean(numeric_only=True)
     hip_add_abd_reference.columns = [i+1 for i in range(100)]
 
     # Adjusted to medical angles
@@ -102,19 +102,19 @@ def analyze_joint_angles():
     hip_add_abd_reference = healthy_reference[healthy_reference['Joint'] == 'Hip_add_abd']
 
     # Hip
-    hip_reference = hip_reference.groupby('Participant').mean()
+    hip_reference = hip_reference.groupby('Participant').mean(numeric_only=True)
     hip_reference.columns = [i+1 for i in range(100)]
 
     # Knee
-    knee_reference = knee_reference.groupby('Participant').mean()
+    knee_reference = knee_reference.groupby('Participant').mean(numeric_only=True)
     knee_reference.columns = [i+1 for i in range(100)]
 
     # Ankle
-    ankle_reference = ankle_reference.groupby('Participant').mean()
+    ankle_reference = ankle_reference.groupby('Participant').mean(numeric_only=True)
     ankle_reference.columns = [i+1 for i in range(100)]
 
     # Hip adduction/abduction
-    hip_add_abd_reference = hip_add_abd_reference.groupby('Participant').mean()
+    hip_add_abd_reference = hip_add_abd_reference.groupby('Participant').mean(numeric_only=True)
     hip_add_abd_reference.columns = [i+1 for i in range(100)]
 
 
@@ -152,51 +152,51 @@ def analyze_joint_angles():
 
 
     # Ankle more impaires
-    ankle_SCI_more_impaired = ankle_SCI_more_impaired.groupby('Participant').mean()
+    ankle_SCI_more_impaired = ankle_SCI_more_impaired.groupby('Participant').mean(numeric_only=True)
     ankle_SCI_more_impaired.columns = [i+1 for i in range(100)]
-    ankle_SCI_more_impaired_mean = ankle_SCI_more_impaired.mean()
+    ankle_SCI_more_impaired_mean = ankle_SCI_more_impaired.mean(numeric_only=True)
     ankle_SCI_more_impaired_std = ankle_SCI_more_impaired.std()
 
     # Ankle less impaires
-    ankle_SCI_less_impaired = ankle_SCI_less_impaired.groupby('Participant').mean()
+    ankle_SCI_less_impaired = ankle_SCI_less_impaired.groupby('Participant').mean(numeric_only=True)
     ankle_SCI_less_impaired.columns = [i+1 for i in range(100)]
-    ankle_SCI_less_impaired_mean = ankle_SCI_less_impaired.mean()
+    ankle_SCI_less_impaired_mean = ankle_SCI_less_impaired.mean(numeric_only=True)
     ankle_SCI_less_impaired_std = ankle_SCI_less_impaired.std()
 
     # Knee more impaires
-    knee_SCI_more_impaired = knee_SCI_more_impaired.groupby('Participant').mean()
+    knee_SCI_more_impaired = knee_SCI_more_impaired.groupby('Participant').mean(numeric_only=True)
     knee_SCI_more_impaired.columns = [i+1 for i in range(100)]
-    knee_SCI_more_impaired_mean = knee_SCI_more_impaired.mean()
+    knee_SCI_more_impaired_mean = knee_SCI_more_impaired.mean(numeric_only=True)
     knee_SCI_more_impaired_std = knee_SCI_more_impaired.std()
 
     # Knee less impaires
-    knee_SCI_less_impaired = knee_SCI_less_impaired.groupby('Participant').mean()
+    knee_SCI_less_impaired = knee_SCI_less_impaired.groupby('Participant').mean(numeric_only=True)
     knee_SCI_less_impaired.columns = [i+1 for i in range(100)]
-    knee_SCI_less_impaired_mean = knee_SCI_less_impaired.mean()
+    knee_SCI_less_impaired_mean = knee_SCI_less_impaired.mean(numeric_only=True)
     knee_SCI_less_impaired_std = knee_SCI_less_impaired.std()
 
     # Hip more impaired
-    hip_SCI_more_impaired = hip_SCI_more_impaired.groupby('Participant').mean()
+    hip_SCI_more_impaired = hip_SCI_more_impaired.groupby('Participant').mean(numeric_only=True)
     hip_SCI_more_impaired.columns = [i+1 for i in range(100)]
-    hip_SCI_more_impaired_mean = hip_SCI_more_impaired.mean()
+    hip_SCI_more_impaired_mean = hip_SCI_more_impaired.mean(numeric_only=True)
     hip_SCI_more_impaired_std = hip_SCI_more_impaired.std()
 
     # Hip less impaired
-    hip_SCI_less_impaired = hip_SCI_less_impaired.groupby('Participant').mean()
+    hip_SCI_less_impaired = hip_SCI_less_impaired.groupby('Participant').mean(numeric_only=True)
     hip_SCI_less_impaired.columns = [i+1 for i in range(100)]
-    hip_SCI_less_impaired_mean = hip_SCI_less_impaired.mean()
+    hip_SCI_less_impaired_mean = hip_SCI_less_impaired.mean(numeric_only=True)
     hip_SCI_less_impaired_std = hip_SCI_less_impaired.std()
 
     # Hip adduction/abduction more impaires
-    hip_add_abd_SCI_more_impaired = hip_add_abd_SCI_more_impaired.groupby(['Participant', 'Side']).mean()
+    hip_add_abd_SCI_more_impaired = hip_add_abd_SCI_more_impaired.groupby(['Participant', 'Side']).mean(numeric_only=True)
     hip_add_abd_SCI_more_impaired.columns = [i+1 for i in range(100)]
-    hip_add_abd_SCI_more_impaired_mean = hip_add_abd_SCI_more_impaired.mean()
+    hip_add_abd_SCI_more_impaired_mean = hip_add_abd_SCI_more_impaired.mean(numeric_only=True)
     hip_add_abd_SCI_more_impaired_std = hip_add_abd_SCI_more_impaired.std()
 
     # Hip adduction/abduction less impaires
-    hip_add_abd_SCI_less_impaired = hip_add_abd_SCI_less_impaired.groupby(['Participant', 'Side']).mean()
+    hip_add_abd_SCI_less_impaired = hip_add_abd_SCI_less_impaired.groupby(['Participant', 'Side']).mean(numeric_only=True)
     hip_add_abd_SCI_less_impaired.columns = [i+1 for i in range(100)]
-    hip_add_abd_SCI_less_impaired_mean = hip_add_abd_SCI_less_impaired.mean()
+    hip_add_abd_SCI_less_impaired_mean = hip_add_abd_SCI_less_impaired.mean(numeric_only=True)
     hip_add_abd_SCI_less_impaired_std = hip_add_abd_SCI_less_impaired.std()
 
 
@@ -224,13 +224,13 @@ def analyze_joint_angles():
     ankle_reference_comfortspeed = ankle_reference_comfortspeed.drop(columns=['Style', 'Trial'])
 
     # Ankle max speed
-    ankle_reference_maxspeed = ankle_reference_maxspeed.groupby('Participant').mean()
+    ankle_reference_maxspeed = ankle_reference_maxspeed.groupby('Participant').mean(numeric_only=True)
     ankle_reference_maxspeed.columns = [i+1 for i in range(100)]
-    ankle_reference_maxspeed_mean = ankle_reference_maxspeed.mean()
+    ankle_reference_maxspeed_mean = ankle_reference_maxspeed.mean(numeric_only=True)
     ankle_reference_maxspeed_std = ankle_reference_maxspeed.std()
 
     # Ankle comfort speed
-    ankle_reference_comfortspeed = ankle_reference_comfortspeed.groupby('Participant').mean()
+    ankle_reference_comfortspeed = ankle_reference_comfortspeed.groupby('Participant').mean(numeric_only=True)
     ankle_reference_comfortspeed.columns = [i+1 for i in range(100)]
 
 
@@ -242,13 +242,13 @@ def analyze_joint_angles():
     knee_reference_comfortspeed = knee_reference_comfortspeed.drop(columns=['Style', 'Trial'])
 
     # Knee max speed
-    knee_reference_maxspeed = knee_reference_maxspeed.groupby('Participant').mean()
+    knee_reference_maxspeed = knee_reference_maxspeed.groupby('Participant').mean(numeric_only=True)
     knee_reference_maxspeed.columns = [i+1 for i in range(100)]
-    knee_reference_maxspeed_mean = knee_reference_maxspeed.mean()
+    knee_reference_maxspeed_mean = knee_reference_maxspeed.mean(numeric_only=True)
     knee_reference_maxspeed_std = knee_reference_maxspeed.std()
 
     # Knee comfort speed
-    knee_reference_comfortspeed = knee_reference_comfortspeed.groupby('Participant').mean()
+    knee_reference_comfortspeed = knee_reference_comfortspeed.groupby('Participant').mean(numeric_only=True)
     knee_reference_comfortspeed.columns = [i+1 for i in range(100)]
 
 
@@ -260,13 +260,13 @@ def analyze_joint_angles():
     hip_reference_comfortspeed = hip_reference_comfortspeed.drop(columns=['Style', 'Trial'])
 
     # Hip max speed
-    hip_reference_maxspeed = hip_reference_maxspeed.groupby('Participant').mean()
+    hip_reference_maxspeed = hip_reference_maxspeed.groupby('Participant').mean(numeric_only=True)
     hip_reference_maxspeed.columns = [i+1 for i in range(100)]
-    hip_reference_maxspeed_mean = hip_reference_maxspeed.mean()
+    hip_reference_maxspeed_mean = hip_reference_maxspeed.mean(numeric_only=True)
     hip_reference_maxspeed_std = hip_reference_maxspeed.std()
 
     # Hip comfort speed
-    hip_reference_comfortspeed = hip_reference_comfortspeed.groupby('Participant').mean()
+    hip_reference_comfortspeed = hip_reference_comfortspeed.groupby('Participant').mean(numeric_only=True)
     hip_reference_comfortspeed.columns = [i+1 for i in range(100)]
 
 
@@ -278,13 +278,13 @@ def analyze_joint_angles():
     hip_add_abd_reference_comfortspeed = hip_add_abd_reference_comfortspeed.drop(columns=['Style', 'Trial'])
 
     # Hip add/abd max speed
-    hip_add_abd_reference_maxspeed = hip_add_abd_reference_maxspeed.groupby('Participant').mean()
+    hip_add_abd_reference_maxspeed = hip_add_abd_reference_maxspeed.groupby('Participant').mean(numeric_only=True)
     hip_add_abd_reference_maxspeed.columns = [i+1 for i in range(100)]
-    hip_add_abd_reference_maxspeed_mean = hip_add_abd_reference_maxspeed.mean()
+    hip_add_abd_reference_maxspeed_mean = hip_add_abd_reference_maxspeed.mean(numeric_only=True)
     hip_add_abd_reference_maxspeed_std = hip_add_abd_reference_maxspeed.std()
 
     # Hip add/abd comfort speed
-    hip_add_abd_reference_comfortspeed = hip_add_abd_reference_comfortspeed.groupby('Participant').mean()
+    hip_add_abd_reference_comfortspeed = hip_add_abd_reference_comfortspeed.groupby('Participant').mean(numeric_only=True)
     hip_add_abd_reference_comfortspeed.columns = [i+1 for i in range(100)]
 
 

@@ -56,7 +56,8 @@ def distinguish_impaired_leg(df_bl, df_clinical, parameters):
     # Assign more impaired leg from df_clinical
     for participant in df_bl['Participant'].unique():
         more_impaired_leg = df_clinical.loc[df_clinical['ID'] == participant, 'More impaired leg'].values[0]
-        df_bl.loc[df_bl['Participant'] == participant, 'More impaired leg'] = more_impaired_leg
+        df_bl['More impaired leg'] = df_bl['More impaired leg'].astype(str)
+        df_bl.loc[df_bl['Participant'] == participant, 'More impaired leg'] = str(more_impaired_leg)
 
     # Process each parameter
     for param in parameters:
@@ -193,10 +194,10 @@ def calculate_p_values(data_controls_max, data_patients, parameter_name, results
     # Calculate mean values for control group
     if not parameter_name.startswith('SSD'):
         controls_data_avg = data_controls_max.groupby('Participant')[[parameter_name]].mean().reset_index()
-        stat_data = stat_data.append(pd.DataFrame({
+        stat_data = pd.concat([stat_data, pd.DataFrame({
             'Value': controls_data_avg[parameter_name],
             'Group': 'HC'
-        }), ignore_index=True)
+        })], ignore_index=True)
 
     if differentiate_legs:
         # Get the mean for each parameter per participant
@@ -205,20 +206,20 @@ def calculate_p_values(data_controls_max, data_patients, parameter_name, results
             more_impaired_param: 'mean',
         }).reset_index()
 
-        stat_data = stat_data.append(pd.DataFrame({
+        stat_data = pd.concat([stat_data, pd.DataFrame({
             'Value': patient_data_avg[less_impaired_param],
             'Group': 'less \nimpaired'
-        }), ignore_index=True)
-        stat_data = stat_data.append(pd.DataFrame({
+        })], ignore_index=True)
+        stat_data = pd.concat([stat_data, pd.DataFrame({
             'Value': patient_data_avg[more_impaired_param],
             'Group': 'more \nimpaired'
-        }), ignore_index=True)
+        })], ignore_index=True)
     else:
         patient_data_avg = data_patients.groupby('Participant')[[parameter_name]].mean().reset_index()
-        stat_data = stat_data.append(pd.DataFrame({
+        stat_data = pd.concat([stat_data, pd.DataFrame({
             'Value': patient_data_avg[parameter_name],
             'Group': 'patients'
-        }), ignore_index=True)
+        })], ignore_index=True)
 
     # Prepare data for statistical tests
     groups = stat_data['Group'].unique()
@@ -228,7 +229,10 @@ def calculate_p_values(data_controls_max, data_patients, parameter_name, results
     _, p_value_main = kruskal(*data_to_test)
 
     # Store overall Kruskal-Wallis p-value
-    results_df = results_df.append({'Parameter': parameter_name, 'P-Value': p_value_main}, ignore_index=True)
+    if not results_df.empty:
+        results_df = pd.concat([results_df, pd.DataFrame([{'Parameter': parameter_name, 'P-Value': p_value_main}])], ignore_index=True)
+    else:
+        results_df = pd.DataFrame([{'Parameter': parameter_name, 'P-Value': p_value_main}])
 
     return results_df
 
@@ -267,17 +271,17 @@ def calculate_p_values_HC(data_controls_comfort, data_controls_max, parameter_na
 
     # Calculate mean values for control group at comfort speed
     controls_comfort_avg = data_controls_comfort.groupby('Participant')[parameter_name].mean().reset_index()
-    stat_data = stat_data.append(pd.DataFrame({
+    stat_data = pd.concat([stat_data, pd.DataFrame({
         'Value': controls_comfort_avg[parameter_name],
         'Group': 'comfort speed'
-    }), ignore_index=True)
+    })], ignore_index=True)
 
     # Calculate mean values for control group at max speed
     controls_max_avg = data_controls_max.groupby('Participant')[parameter_name].mean().reset_index()
-    stat_data = stat_data.append(pd.DataFrame({
+    stat_data = pd.concat([stat_data, pd.DataFrame({
         'Value': controls_max_avg[parameter_name],
         'Group': 'max speed'
-    }), ignore_index=True)
+    })], ignore_index=True)
 
     # Perform Kruskal-Wallis test
     _, p_val = kruskal(
@@ -286,7 +290,10 @@ def calculate_p_values_HC(data_controls_comfort, data_controls_max, parameter_na
     )
 
     # Store Kruskal-Wallis p-value
-    results_df_HC = results_df_HC.append({'Parameter': parameter_name, 'P-Value': p_val}, ignore_index=True)
+    if not results_df_HC.empty:
+        results_df_HC = pd.concat([results_df_HC, pd.DataFrame([{'Parameter': parameter_name, 'P-Value': p_val}])], ignore_index=True)
+    else:
+        results_df_HC = pd.DataFrame([{'Parameter': parameter_name, 'P-Value': p_val}])
 
     return results_df_HC
 
@@ -475,10 +482,10 @@ def plot_parameters(data_controls_max, data_patients, parameter_name, adj_p_valu
     # Calculating the mean for control data if multiple entries per participant exist
     if not parameter_name.startswith('SSD'):
         controls_data_avg = data_controls_max.groupby('Participant')[[parameter_name]].mean().reset_index()
-        plot_data = plot_data.append(pd.DataFrame({
+        plot_data = pd.concat([plot_data, pd.DataFrame({
             'Value': controls_data_avg[parameter_name],
             'Group': 'HC'
-        }), ignore_index=True)
+        })], ignore_index=True)
 
     if differentiate_legs:
         # Calculate the mean for each parameter for each participant (so each person is plotted once)
@@ -487,21 +494,21 @@ def plot_parameters(data_controls_max, data_patients, parameter_name, adj_p_valu
             more_impaired_param: 'mean',
         }).reset_index()
 
-        plot_data = plot_data.append(pd.DataFrame({
+        plot_data = pd.concat([plot_data, pd.DataFrame({
             'Value': patient_data_avg[less_impaired_param],
             'Group': 'less \nimpaired'
-        }), ignore_index=True)
-        plot_data = plot_data.append(pd.DataFrame({
+        })], ignore_index=True)
+        plot_data = pd.concat([plot_data, pd.DataFrame({
             'Value': patient_data_avg[more_impaired_param],
             'Group': 'more \nimpaired'
-        }), ignore_index=True)
+        })], ignore_index=True)
     else:
         # Calculate the mean for the parameter for each participant
         patient_data_avg = data_patients.groupby('Participant')[[parameter_name]].mean().reset_index()
-        plot_data = plot_data.append(pd.DataFrame({
+        plot_data = pd.concat([plot_data, pd.DataFrame({
             'Value': patient_data_avg[parameter_name],
             'Group': 'patients'
-        }), ignore_index=True)
+        })], ignore_index=True)
 
     # Prepare data for Matplotlib boxplot
     groups = plot_data['Group'].unique()
@@ -657,17 +664,17 @@ def plot_parameters_HC(data_controls_comfort, data_controls_max, parameter_name,
     
     # Calculate the mean for control data at comfort speed if multiple entries per participant exist
     controls_comfort_avg = data_controls_comfort.groupby('Participant')[parameter_name].mean().reset_index()
-    plot_data = plot_data.append(pd.DataFrame({
+    plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
         'Value': controls_comfort_avg[parameter_name],
         'Group': 'comfort speed'
-    }), ignore_index=True)
+    })], ignore_index=True)
 
     # Calculate the mean for control data at max speed
     controls_max_avg = data_controls_max.groupby('Participant')[parameter_name].mean().reset_index()
-    plot_data = plot_data.append(pd.DataFrame({
+    plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
         'Value': controls_max_avg[parameter_name],
         'Group': 'max speed'
-    }), ignore_index=True)
+    })], ignore_index=True)
 
     # Prepare data for Matplotlib boxplot
     groups = plot_data['Group'].unique()
@@ -790,12 +797,12 @@ def calculate_p_values_with_demographic_correction(data_controls_max, data_patie
     # Calculate mean values for control group
     if not parameter_name.startswith('SSD'):
         controls_data_avg = data_controls_max.groupby('Participant')[[parameter_name, 'Age', 'BMI']].mean().reset_index()
-        stat_data = stat_data.append(pd.DataFrame({
+        stat_data = pd.concat([stat_data, pd.DataFrame({
             'Value': controls_data_avg[parameter_name],
             'Age': controls_data_avg['Age'],
             'BMI': controls_data_avg['BMI'],
             'Group': 'HC'
-        }), ignore_index=True)
+        })], ignore_index=True)
 
     if differentiate_legs:
         # Get the mean for each parameter per participant
@@ -806,26 +813,26 @@ def calculate_p_values_with_demographic_correction(data_controls_max, data_patie
             'BMI': 'mean'
         }).reset_index()
 
-        stat_data = stat_data.append(pd.DataFrame({
+        stat_data = pd.concat([stat_data, pd.DataFrame({
             'Value': patient_data_avg[less_impaired_param],
             'Age': patient_data_avg['Age'],
             'BMI': patient_data_avg['BMI'],
             'Group': 'less \nimpaired'
-        }), ignore_index=True)
-        stat_data = stat_data.append(pd.DataFrame({
+        })], ignore_index=True)
+        stat_data = pd.concat([stat_data, pd.DataFrame({
             'Value': patient_data_avg[more_impaired_param],
             'Age': patient_data_avg['Age'],
             'BMI': patient_data_avg['BMI'],
             'Group': 'more \nimpaired'
-        }), ignore_index=True)
+        })], ignore_index=True)
     else:
         patient_data_avg = data_patients.groupby('Participant')[[parameter_name, 'Age', 'BMI']].mean().reset_index()
-        stat_data = stat_data.append(pd.DataFrame({
+        stat_data = pd.concat([stat_data, pd.DataFrame({
             'Value': patient_data_avg[parameter_name],
             'Age': patient_data_avg['Age'],
             'BMI': patient_data_avg['BMI'],
             'Group': 'patients'
-        }), ignore_index=True)
+        })], ignore_index=True)
 
     # Ensure stat_data is a DataFrame and drop NaN values
     stat_data_reg = stat_data.dropna(subset=['Value', 'Age', 'BMI']).copy()
@@ -848,7 +855,7 @@ def calculate_p_values_with_demographic_correction(data_controls_max, data_patie
     _, p_value_main = kruskal(*data_to_test)
 
     # Store overall Kruskal-Wallis p-value
-    results_df = results_df.append({'Parameter': parameter_name, 'P-Value': p_value_main}, ignore_index=True)
+    results_df = pd.concat([results_df,{'Parameter': parameter_name, 'P-Value': p_value_main}], ignore_index=True)
 
     return results_df
 
@@ -897,25 +904,25 @@ def plot_proximal_distal_HC(data_controls_comfort, data_controls_max, corrected_
             'Participant')[pair[1]].mean().reset_index()
 
         # Append the data for plotting
-        plot_data = plot_data.append(pd.DataFrame({
+        plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
             'Value': controls_comfort_avg_ankle_knee[pair[0]],
             'Group': 'Ankle/Knee Comfort'
-        }), ignore_index=True)
+        })], ignore_index=True)
 
-        plot_data = plot_data.append(pd.DataFrame({
+        plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
             'Value': controls_max_avg_ankle_knee[pair[0]],
             'Group': 'Ankle/Knee Max'
-        }), ignore_index=True)
+        })], ignore_index=True)
 
-        plot_data = plot_data.append(pd.DataFrame({
+        plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
             'Value': controls_comfort_avg_hip_knee[pair[1]],
             'Group': 'Hip/Knee Comfort'
-        }), ignore_index=True)
+        })], ignore_index=True)
 
-        plot_data = plot_data.append(pd.DataFrame({
+        plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
             'Value': controls_max_avg_hip_knee[pair[1]],
             'Group': 'Hip/Knee Max'
-        }), ignore_index=True)
+        })], ignore_index=True)
 
         # Define colors for each group
         palette = {
@@ -926,12 +933,13 @@ def plot_proximal_distal_HC(data_controls_comfort, data_controls_max, corrected_
         }
 
         # Plotting using seaborn
-        sns.boxplot(x='Group', y='Value', data=plot_data, 
-                    palette=palette, showfliers=False, width=0.45,
-                    boxprops=dict(edgecolor='black', linewidth=0.8), 
-                    medianprops=dict(color='black', linewidth=0.8),
-                    whiskerprops=dict(color='black', linewidth=0.8), 
-                    capprops=dict(color='black', linewidth=0.8))
+        sns.boxplot(x='Group', y='Value', hue='Group', data=plot_data, 
+            palette=palette, showfliers=False, width=0.45,
+            boxprops=dict(edgecolor='black', linewidth=0.8), 
+            medianprops=dict(color='black', linewidth=0.8),
+            whiskerprops=dict(color='black', linewidth=0.8), 
+            capprops=dict(color='black', linewidth=0.8),
+            dodge=False)
 
         # Adding stripplot to show individual data points with jitter
         sns.stripplot(x='Group', y='Value', data=plot_data, color='k', 
@@ -1024,22 +1032,22 @@ def plot_proximal_distal(data_controls_max, data_patients):
         }).reset_index()
 
         # Append the data for plotting
-        plot_data = plot_data.append(pd.DataFrame({
+        plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
             'Value': patient_data_avg[more_impaired_ankle_knee],
             'Group': 'Ankle/Knee More Impaired'
-        }), ignore_index=True)
-        plot_data = plot_data.append(pd.DataFrame({
+        })], ignore_index=True)
+        plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
             'Value': patient_data_avg[less_impaired_ankle_knee],
             'Group': 'Ankle/Knee Less Impaired'
-        }), ignore_index=True)
-        plot_data = plot_data.append(pd.DataFrame({
+        })], ignore_index=True)
+        plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
             'Value': patient_data_avg[more_impaired_hip_knee],
             'Group': 'Hip/Knee More Impaired'
-        }), ignore_index=True)
-        plot_data = plot_data.append(pd.DataFrame({
+        })], ignore_index=True)
+        plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
             'Value': patient_data_avg[less_impaired_hip_knee],
             'Group': 'Hip/Knee Less Impaired'
-        }), ignore_index=True)
+        })], ignore_index=True)
 
     # Prepare data for Matplotlib boxplot
     groups = plot_data['Group'].unique()
@@ -1125,8 +1133,9 @@ def plot_proximal_distal(data_controls_max, data_patients):
             y_line = max_y + current_y_offset + y_offset
             y_text = max_y + current_y_offset + y_text_offset
 
-            plt.plot([group1_idx, group2_idx], [y_line, y_line], color='k', lw=1)
-            plt.text((group1_idx + group2_idx) / 2, y_text, annotation, ha='center', va='bottom', color='k', fontsize=18)
+            if annotation:  # Only draw if there's significance
+                plt.plot([group1_idx, group2_idx], [y_line, y_line], color='k', lw=1)
+                plt.text((group1_idx + group2_idx) / 2, y_text, annotation, ha='center', va='bottom', color='k', fontsize=18)
 
             current_y_offset += y_offset
 
@@ -1170,10 +1179,10 @@ def plot_proximal_distal(data_controls_max, data_patients):
     controls_max_avg_knee_hip = data_controls_max.groupby('Participant')[[parameter_knee_hip]].mean().reset_index()
 
     # Append the healthy control data
-    plot_data = plot_data.append(pd.DataFrame({
+    plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
         'Value': controls_max_avg_ankle_knee[parameter_ankle_knee],
         'Group': 'HC (ankle/knee)'
-    }), ignore_index=True)
+    })], ignore_index=True)
 
     # Calculate the mean for each parameter for each participant (so each person is plotted once)
     patient_data_avg = data_patients.groupby('Participant').agg({
@@ -1184,30 +1193,30 @@ def plot_proximal_distal(data_controls_max, data_patients):
     }).reset_index()
 
     # Append the less and more impaired data for ankle/knee and knee/hip
-    plot_data = plot_data.append(pd.DataFrame({
+    plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
         'Value': patient_data_avg[less_impaired_ankle_knee],
         'Group': 'LI (ankle/knee)'
-    }), ignore_index=True)
+    })], ignore_index=True)
     
-    plot_data = plot_data.append(pd.DataFrame({
+    plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
         'Value': patient_data_avg[more_impaired_ankle_knee],
         'Group': 'MI (ankle/knee)'
-    }), ignore_index=True)
+    })], ignore_index=True)
 
-    plot_data = plot_data.append(pd.DataFrame({
+    plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
         'Value': controls_max_avg_knee_hip[parameter_knee_hip],
         'Group': 'HC (knee/hip)'
-    }), ignore_index=True)
+    })], ignore_index=True)
     
-    plot_data = plot_data.append(pd.DataFrame({
+    plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
         'Value': patient_data_avg[less_impaired_knee_hip],
         'Group': 'LI (knee/hip)'
-    }), ignore_index=True)
+    })], ignore_index=True)
 
-    plot_data = plot_data.append(pd.DataFrame({
+    plot_data = plot_data = pd.concat([plot_data, pd.DataFrame({
         'Value': patient_data_avg[more_impaired_knee_hip],
         'Group': 'MI (knee/hip)'
-    }), ignore_index=True)
+    })], ignore_index=True)
 
     # Prepare data for Matplotlib boxplot
     groups = plot_data['Group'].unique()
