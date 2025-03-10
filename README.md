@@ -40,17 +40,17 @@ Ensure that the pre-processed datasets is in the `Data` folder located in the pr
 
 ## Extracting Swimming Parameters
 
-First, set up the healthy reference by running `Scripts/create_healthy_reference.py`. The script will access the template in `Data/Templates` and save it to `Data/Healthy_Reference_Data` located in the pre-defined path (`Scripts/config.py`).
+First, set up the healthy reference by running `Scripts/extract_reference.py`. The script will access the template in `Data/Templates` and save it to `Data/Healthy_Reference_Data` located in the pre-defined path (`Scripts/config.py`).
 
 To extract the swimming parameters run `Scripts/main.py`. The script will use the templates in `Data/Templates` and save them to `Results` located in the pre-defined path (`Scripts/config.py`).
 
 ## Validation
 
-To validate the sensor orientations against optical motion capture (VICON, Oxford, UK) run `Scripts/validation.py`. Figures will be saved to `Figures` located in the pre-defined path (`Scripts/config.py`).
+To validate the sensor orientations against optical motion capture (VICON, Oxford, UK) run `Scripts/src/analysis/validation.py`. Figures will be saved to `Figures` located in the pre-defined path (`Scripts/config.py`).
 
 ## Data Analysis
 
-To perform a comprehensive analysis of the extracted swimming parameters (as included in the publication [publication link]) run `Scripts/run_analysis.py`. This script conducts statistical analyses, visualizes the data, and applies k-means clustering for pattern identification. Figures will be saved to `Figures` located in the pre-defined path (`Scripts/config.py`).
+To perform a comprehensive analysis of the extracted swimming parameters (as included in the publication [publication link]) run `Scripts/src/analysis/run_analysis.py`. This script conducts statistical analyses, visualizes the data, and applies k-means clustering for pattern identification. Figures will be saved to `Figures` located in the pre-defined path (`Scripts/config.py`).
 
 ## Contact 
 
