@@ -83,7 +83,7 @@ def load_sensor_data(file_path_data):
     Returns extracted accelerometer, gyroscope data, sensor positions, and time data.
     """
     # Find the only .mat file
-    mat_files = [f for f in os.listdir(file_path_data) if f.endswith('.mat')]
+    mat_files = [f for f in os.listdir(file_path_data) if f.endswith('.mat') and not f.startswith('.')]
     if not mat_files:
         print(f"No .mat file found in {file_path_data}")
         return None  # No data to return
@@ -162,7 +162,7 @@ def extract_trial_times(file_path_data):
         dict: A dictionary containing start and stop times for predefined trials and remaining trial times.
     """
     # Find the only .csv file
-    csv_files = [f for f in os.listdir(file_path_data) if f.endswith('.csv')]
+    csv_files = [f for f in os.listdir(file_path_data) if f.endswith('.csv') and not f.startswith('.')]
     if not csv_files:
         print(f"No CSV file found in {file_path_data}")
         return None  # No data to return
