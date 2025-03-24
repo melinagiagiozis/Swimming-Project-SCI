@@ -372,7 +372,7 @@ def perform_clustering():
             plt.yticks(fontsize=22)
             plt.tight_layout()
             plt.xlim(-0.4, 1.4)
-            plt.savefig('Figures/Clustering/' + parameter.replace('/', '_').replace(' ', '_') + '.png', dpi=300)
+            plt.savefig(os.path.join(figures_path, 'Clustering/' + parameter.replace('/', '_').replace(' ', '_') + '.png'), dpi=300)
             plt.close()
 
     # Plot swimming parameters (more and less impaired leg) between clusters
@@ -497,7 +497,7 @@ def perform_clustering():
             plt.yticks(fontsize=20)
 
             # Save the figure
-            plt.savefig('Figures/Clustering/' + parameter.replace('/', '_').replace(' ', '_') + '.png', dpi=300)
+            plt.savefig(os.path.join(figures_path, 'Clustering/' + parameter.replace('/', '_').replace(' ', '_') + '.png'), dpi=300)
             plt.close()
 
 
@@ -637,7 +637,7 @@ def perform_clustering():
     # plt.legend(loc='upper right', bbox_to_anchor=(-0.1, 0.1))
     plt.title('More impaired leg', y=1.13, size=20)
     plt.tight_layout()
-    plt.savefig('Figures/Clustering/Spiderplot_Clusters_MI.png', dpi=300)
+    plt.savefig(os.path.join(figures_path, 'Clustering/Spiderplot_Clusters_MI.png'), dpi=300)
     plt.close()
 
 
@@ -688,7 +688,7 @@ def perform_clustering():
     plt.legend(loc='upper right', bbox_to_anchor=(-0.15, 0.1), fontsize=14)
     plt.title('Less impaired leg', y=1.13, size=20)
     plt.tight_layout()
-    plt.savefig('Figures/Clustering/Spiderplot_Clusters_LI.png', dpi=300)
+    plt.savefig(os.path.join(figures_path, 'Clustering/Spiderplot_Clusters_LI.png'), dpi=300)
     plt.close()
 
 
