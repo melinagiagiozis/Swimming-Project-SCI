@@ -303,8 +303,8 @@ def analyze_joint_angles():
     plt.fill_between(range(100), ankle_SCI_more_impaired_mean + ankle_SCI_more_impaired_std, 
                     ankle_SCI_more_impaired_mean - ankle_SCI_more_impaired_std, color='crimson', alpha=0.05)
 
-    plt.xlabel('Stroke cycle [%]', size=24)
-    plt.ylabel('Ankle dorsiflexion [deg]', size=24)
+    plt.xlabel('Stroke cycle [%]', size=28)
+    plt.ylabel('Ankle dorsiflexion [deg]', size=28)
     plt.xticks(size=20)
     plt.yticks(size=20)
 
@@ -342,8 +342,8 @@ def analyze_joint_angles():
     plt.fill_between(range(100), knee_SCI_more_impaired_mean + knee_SCI_more_impaired_std, 
                     knee_SCI_more_impaired_mean - knee_SCI_more_impaired_std, color='crimson', alpha=0.05)
 
-    plt.xlabel('Stroke cycle [%]', size=24)
-    plt.ylabel('Knee flexion [deg]', size=24)
+    plt.xlabel('Stroke cycle [%]', size=28)
+    plt.ylabel('Knee flexion [deg]', size=28)
     plt.xticks(size=20)
     plt.yticks(size=20)
 
@@ -382,8 +382,8 @@ def analyze_joint_angles():
                     hip_SCI_more_impaired_mean - hip_SCI_more_impaired_std, color='crimson', alpha=0.05)
 
     # plt.title('hip flexion/extension', fontsize=16)
-    plt.xlabel('Stroke cycle [%]', size=24)
-    plt.ylabel('Hip flexion [deg]', size=24)
+    plt.xlabel('Stroke cycle [%]', size=28)
+    plt.ylabel('Hip flexion [deg]', size=28)
     plt.xticks(size=20)
     plt.yticks(size=20)
 
@@ -422,8 +422,8 @@ def analyze_joint_angles():
                     hip_add_abd_SCI_more_impaired_mean - hip_add_abd_SCI_more_impaired_std, color='crimson', alpha=0.05)
 
     # plt.title('hip adduction/abduction', fontsize=16)
-    plt.xlabel('Stroke cycle [%]', size=24)
-    plt.ylabel('Hip abduction [deg]', size=24)
+    plt.xlabel('Stroke cycle [%]', size=28)
+    plt.ylabel('Hip abduction [deg]', size=28)
     plt.xticks(size=20)
     plt.yticks(size=20)
 
@@ -451,8 +451,8 @@ def analyze_joint_angles():
     plt.plot(knee_reference_maxspeed_mean, hip_reference_maxspeed_mean, 'dimgray', label='healthy controls')
     plt.plot(knee_SCI_less_impaired_mean, hip_SCI_less_impaired_mean, 'cornflowerblue', label='less impaired leg')
     plt.plot(knee_SCI_more_impaired_mean, hip_SCI_more_impaired_mean, 'crimson', label='more impaired leg')
-    plt.xlabel('Knee flexion [deg]', size=24)
-    plt.ylabel('Hip flexion [deg]', size=24)
+    plt.xlabel('Knee flexion [deg]', size=28)
+    plt.ylabel('Hip flexion [deg]', size=28)
     plt.xticks(size=20)
     plt.yticks(ticks=[10, 20, 30, 40, 50], labels=[10, 20, 30, 40, 50], size=20)
 
@@ -471,8 +471,8 @@ def analyze_joint_angles():
     plt.plot(ankle_reference_maxspeed_mean, knee_reference_maxspeed_mean, 'dimgray', label='healthy controls')
     plt.plot(ankle_SCI_less_impaired_mean, knee_SCI_less_impaired_mean, 'cornflowerblue', label='less impaired leg')
     plt.plot(ankle_SCI_more_impaired_mean, knee_SCI_more_impaired_mean, 'crimson', label='more impaired leg')
-    plt.xlabel('Ankle dorsiflexion [deg]', size=24)
-    plt.ylabel('Knee flexion [deg]', size=24)
+    plt.xlabel('Ankle dorsiflexion [deg]', size=28)
+    plt.ylabel('Knee flexion [deg]', size=28)
     plt.xticks(size=20)
     plt.yticks(size=20)
     plt.legend(loc='upper left', fontsize=20)

@@ -553,7 +553,7 @@ def plot_parameters(data_controls_max, data_patients, parameter_name, adj_p_valu
 
     plt.xlabel('')
     plt.ylabel('')
-    plt.xticks(ticks=range(1, len(groups) + 1), labels=groups, size=20)
+    plt.xticks(ticks=range(1, len(groups) + 1), labels=groups, size=22)
     plt.yticks(size=18)
 
     plt.axvline(x=1.5, color='grey', linestyle='--', linewidth=1)
@@ -612,19 +612,21 @@ def plot_parameters(data_controls_max, data_patients, parameter_name, adj_p_valu
 
     # Set titles and labels based on the parameter name
     if parameter_name.startswith('RoM ankle'):
-        plt.ylabel('Ankle flexion RoM [deg]', size=20)
+        plt.ylabel('Ankle flexion RoM [deg]', size=24)
     elif parameter_name.startswith('RoM knee'):
-        plt.ylabel('Knee flexion RoM [deg]', size=20)
+        plt.ylabel('Knee flexion RoM [deg]', size=24)
+        from matplotlib import rcParams
+        rcParams.update({'figure.autolayout': True})
     elif parameter_name == 'Velocity':
-        plt.ylabel('Velocity [m/s]', size=20)
+        plt.ylabel('Velocity [m/s]', size=24)
     elif parameter_name == 'Distance per stroke':
-        plt.ylabel('Distance per stroke [m]', size=20)
+        plt.ylabel('Distance per stroke [m]', size=24)
     elif parameter_name == 'Time':
-        plt.ylabel('Time [s]', size=20)
+        plt.ylabel('Time [s]', size=24)
     else:
         plt.title(f'{parameter_name}', size=18)
     
-    plt.tight_layout()
+    plt.tight_layout(pad=2)
     plt.savefig(os.path.join(figures_path, 'SCI_Baseline/' + re.sub(r'_Mean$', '', parameter_name.replace('/', '_').replace(' ', '_')) + '.png'), dpi=300)
     plt.close()
 
@@ -709,7 +711,7 @@ def plot_parameters_HC(data_controls_comfort, data_controls_max, parameter_name,
 
     plt.xlabel('')
     plt.ylabel('')
-    plt.xticks(ticks=range(1, len(groups) + 1), labels=groups, size=20)
+    plt.xticks(ticks=range(1, len(groups) + 1), labels=groups, size=22)
     plt.yticks(size=18)
 
     # Define significance annotation based on p-value
@@ -876,7 +878,7 @@ def plot_proximal_distal_HC(data_controls_comfort, data_controls_max, corrected_
     ]
 
     titles = ['ACC', 'Asymmetry SSD']
-    titles_pos = [1.1, 11.5]
+    titles_pos = [1.13, 12]
 
     lower_limits = [0.59, 0]
     upper_limits = [1.11, 12]
@@ -980,9 +982,9 @@ def plot_proximal_distal_HC(data_controls_comfort, data_controls_max, corrected_
 
         # Add labels
         plt.text(0.5, titles_pos[parameter_pairs.index(pair)], 
-                 'ankle-knee', ha='center', va='bottom', fontsize=20)
+                 'ankle-knee', ha='center', va='bottom', fontsize=24)
         plt.text(2.5, titles_pos[parameter_pairs.index(pair)], 
-                 'knee-hip', ha='center', va='bottom', fontsize=20)
+                 'knee-hip', ha='center', va='bottom', fontsize=24)
 
         # Set labels and title
         plt.ylabel(titles[parameter_pairs.index(pair)], size=20)
@@ -990,11 +992,12 @@ def plot_proximal_distal_HC(data_controls_comfort, data_controls_max, corrected_
         plt.ylim(lower_limits[parameter_pairs.index(pair)], 
                  upper_limits[parameter_pairs.index(pair)])
         plt.xticks(ticks=[0, 1, 2, 3], labels=['comfort speed', 'max speed', 
-                                               'comfort speed', 'max speed'], size=20)
+                                               'comfort speed', 'max speed'], size=24)
         plt.yticks(ticks=ticks_labels[parameter_pairs.index(pair)], 
                    labels=ticks_labels[parameter_pairs.index(pair)], size=18)
 
         plt.tight_layout()
+        plt.legend('')
         plt.savefig(os.path.join(figures_path, 'Healthy_Controls/' + titles[
             parameter_pairs.index(pair)].replace(' ', '_') + '_HC.png'), dpi=300)
         plt.close()
@@ -1143,14 +1146,14 @@ def plot_proximal_distal(data_controls_max, data_patients):
     plt.axvline(x=2.5, color='k', linewidth=1)
 
     # Add labels
-    plt.text(1.5, 6.2, 'ankle-knee', ha='center', va='bottom', fontsize=20)
-    plt.text(3.5, 6.2, 'knee-hip', ha='center', va='bottom', fontsize=20)
+    plt.text(1.5, 6.2, 'ankle-knee', ha='center', va='bottom', fontsize=24)
+    plt.text(3.5, 6.2, 'knee-hip', ha='center', va='bottom', fontsize=24)
 
     # Customize axes labels
     plt.xlabel('')
-    plt.ylabel('SSD', size=20)
+    plt.ylabel('SSD', size=24)
     plt.yticks(size=18)
-    plt.xticks(ticks=[1, 2, 3, 4], labels=['less impaired', 'more impaired', 'less impaired', 'more impaired'], size=20)
+    plt.xticks(ticks=[1, 2, 3, 4], labels=['less impaired', 'more impaired', 'less impaired', 'more impaired'], size=24)
     plt.ylim(0, 6.4)
 
     plt.tight_layout()
@@ -1259,8 +1262,8 @@ def plot_proximal_distal(data_controls_max, data_patients):
     plt.axvline(x=4.5, color='grey', linestyle='--', linewidth=1)
     plt.axvline(x=3.5, color='k', linewidth=1)
 
-    plt.text(2, 1.08, 'ankle-knee', ha='center', va='bottom', fontsize=20)
-    plt.text(5, 1.08, 'knee-hip', ha='center', va='bottom', fontsize=20)
+    plt.text(2, 1.08, 'ankle-knee', ha='center', va='bottom', fontsize=24)
+    plt.text(5, 1.08, 'knee-hip', ha='center', va='bottom', fontsize=24)
 
     # Perform statistical tests and add significance annotations
     max_y = plot_data['Value'].max() - 0.02
@@ -1321,12 +1324,12 @@ def plot_proximal_distal(data_controls_max, data_patients):
             current_y_offset += y_offset
 
     plt.xlabel('')
-    plt.ylabel('ACC', size=20)
+    plt.ylabel('ACC', size=24)
     plt.ylim(0.59, 1.11)
     plt.yticks(ticks=[0.6, 0.7, 0.8, 0.9, 1.0], labels=['0.6', '0.7', '0.8', '0.9', '1.0'], size=18)
     plt.xticks(ticks=[1, 2, 3, 4, 5, 6], labels=['HC', 'less \nimpaired', 
                                                     'more \nimpaired', 'HC',
-                                                    'less \nimpaired', 'more \nimpaired'], size=20)
+                                                    'less \nimpaired', 'more \nimpaired'], size=24)
 
     plt.tight_layout()
     plt.savefig(os.path.join(figures_path, 'SCI_Baseline/ACC.png'), dpi=300)
@@ -1406,7 +1409,7 @@ def swimming_profiles(df_bl, df_hc_comfortspeed_means, df_hc_maxspeed_means):
     ax.set_theta_direction(-1)
 
     # Draw one axe per variable and add labels
-    plt.xticks(angles[:-1], labels, size=10)
+    plt.xticks(angles[:-1], labels, size=14)
 
     colors = ['gray', 'cornflowerblue', 'crimson']
     ha = 8 * ['left'] + ['center'] + 16 * ['right'] + ['center'] + 7 * ['left']
@@ -1428,8 +1431,12 @@ def swimming_profiles(df_bl, df_hc_comfortspeed_means, df_hc_maxspeed_means):
 
     # Move the second label slightly to the left
     x, y = ax.get_xticklabels()[8].get_position()
-    ax.get_xticklabels()[8].set_position((x, y-0.03))
-    ax.get_xticklabels()[25].set_position((x, y-0.03))
+    ax.get_xticklabels()[7].set_position((x, y-0.03))
+    ax.get_xticklabels()[8].set_position((x, y-0.09))
+    ax.get_xticklabels()[9].set_position((x, y-0.03))
+    ax.get_xticklabels()[24].set_position((x, y-0.03))
+    ax.get_xticklabels()[25].set_position((x, y-0.09))
+    ax.get_xticklabels()[26].set_position((x, y-0.03))
 
     # Function to fill an arch segment
     def fill_arch(start_angle, end_angle, lower, upper, arch_color, alpha):
@@ -1451,6 +1458,6 @@ def swimming_profiles(df_bl, df_hc_comfortspeed_means, df_hc_maxspeed_means):
                ['-3.0', '-2.0', '-1.0', '0.0', '1.0', '2.0', '3.0'], color='grey', size=7)
 
     plt.ylim(-4, 4)
-    plt.legend(loc='upper right', bbox_to_anchor=(-0.1, 0.1))
+    plt.legend(loc='upper right', bbox_to_anchor=(-0.13, 0.09), fontsize=14)
     plt.savefig(os.path.join(figures_path, 'SCI_Baseline/Spiderplot.png'), dpi=300)
     plt.close()

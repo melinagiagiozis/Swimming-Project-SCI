@@ -318,21 +318,21 @@ def perform_clustering():
                 median.set(color='black')
 
             if parameter == 'Velocity':
-                plt.ylabel('Velocity [m/s]', fontsize=22)
+                plt.ylabel('Velocity [m/s]', fontsize=24)
             elif parameter == 'Stroke rate':
                 plt.ylabel('Stroke rate [strokes/min]', fontsize=18)
-            elif parameter == 'Phase shift':
-                plt.ylabel('Phase shift [%]', fontsize=22)
+            elif parameter == 'Phase shift std':
+                plt.ylabel('Phase shift variability [%]', fontsize=24)
             elif parameter == 'Stroke duration':
                 plt.ylabel('Stroke duration [s]', fontsize=18)
             elif parameter == 'Stroke duration variability':
-                plt.ylabel('Stroke duration variability [s]', fontsize=22)
+                plt.ylabel('Stroke duration variability [s]', fontsize=24)
                 plt.yticks(ticks=[0.05, 0.1, 0.15, 0.20],
                         labels=[0.05, 0.1, 0.15, 0.20])
             elif parameter == 'Distance per stroke':
-                plt.ylabel('Distance per stroke [m]', fontsize=22)
+                plt.ylabel('Distance per stroke [m]', fontsize=24)
             else:
-                plt.ylabel(parameter, fontsize=22)
+                plt.ylabel(parameter, fontsize=24)
 
             # Adding significance indicators
             ax = plt.gca()
@@ -368,7 +368,7 @@ def perform_clustering():
                         base_y = y 
             
             # Titles and labels, modify as necessary
-            plt.xticks(rotation=0, fontsize=22)
+            plt.xticks(rotation=0, fontsize=24)
             plt.yticks(fontsize=22)
             plt.tight_layout()
             plt.xlim(-0.4, 1.4)
@@ -464,19 +464,19 @@ def perform_clustering():
 
             # Set titles and labels
             if parameter.startswith('RoM ankle'):
-                plt.ylabel('Ankle flexion RoM [deg]', size=20)
+                plt.ylabel('Ankle flexion RoM [deg]', size=24)
             elif parameter.startswith('RoM knee'):
-                plt.ylabel('Knee flexion RoM [deg]', size=20)
+                plt.ylabel('Knee flexion RoM [deg]', size=24)
             elif parameter.startswith('RoM hip (flexion/extension)'):
                 plt.ylabel('Hip flexion RoM [deg]', size=18)
             elif parameter.startswith('RoM hip (abduction/adduction)'):
                 plt.ylabel('Hip abduction RoM [deg]', size=18)
             elif parameter.startswith('ACC (ankle'):
-                plt.ylabel('ACC (ankle-knee)', size=20)
+                plt.ylabel('ACC (ankle-knee)', size=24)
                 plt.ylim(0.79, 1.08)
                 plt.yticks(ticks=[0.8, 0.9, 1.0])
             elif parameter.startswith('ACC (hip'):
-                plt.ylabel('ACC (knee-hip)', size=20)
+                plt.ylabel('ACC (knee-hip)', size=24)
                 plt.ylim(0.79, 1.08)
                 plt.yticks(ticks=[0.8, 0.9, 1.0])
             elif parameter.startswith('SSD (ankle'):
@@ -493,8 +493,8 @@ def perform_clustering():
             else:
                 plt.title(parameter, size=18)
 
-            plt.xticks([1.5, 4.5], ['cluster 1', 'cluster 2'], fontsize=20)
-            plt.yticks(fontsize=20)
+            plt.xticks([1.5, 4.5], ['cluster 1', 'cluster 2'], fontsize=24)
+            plt.yticks(fontsize=22)
 
             # Save the figure
             plt.savefig(os.path.join(figures_path, 'Clustering/' + parameter.replace('/', '_').replace(' ', '_') + '.png'), dpi=300)
@@ -546,6 +546,7 @@ def perform_clustering():
         df.rename(columns={'Asymmetry SSD (ankle/knee)': 'Asymmetry SSD (ankle-knee)'}, inplace=True)
         df.rename(columns={'Asymmetry SSD (hip/knee)': 'Asymmetry SSD (knee-hip)'}, inplace=True)
         df.rename(columns={'Sidewards displacement': 'Lateral displacement'}, inplace=True)
+        df.rename(columns={'Phase shift std': 'Phase shift variability'}, inplace=True)
 
     # Calculate z-scores 
     z_scores_cluster_1_li = calculate_z_scores(cluster_1_li_data, df_hc_maxspeed_means)
@@ -586,7 +587,7 @@ def perform_clustering():
     ax.set_theta_offset(0)
     ax.set_theta_direction(-1)
 
-    plt.xticks(angles[:-1], labels, size=14)
+    plt.xticks(angles[:-1], labels, size=16)
 
     colors = ['gray', 'darkgreen', 'darkorchid']
     columns = ['healthy range', 'cluster 1: more impaired leg', 'cluster 2: more impaired leg']
@@ -606,16 +607,16 @@ def perform_clustering():
 
     # Move the second label slightly to the left
     x, y = ax.get_xticklabels()[8].get_position()
-    ax.get_xticklabels()[8].set_position((x, y-0.1))
-    ax.get_xticklabels()[25].set_position((x, y-0.1))
+    ax.get_xticklabels()[8].set_position((x, y-0.11))
+    ax.get_xticklabels()[25].set_position((x, y-0.11))
 
     x, y = ax.get_xticklabels()[7].get_position()
-    ax.get_xticklabels()[7].set_position((x, y-0.04))
-    ax.get_xticklabels()[26].set_position((x, y-0.04))
+    ax.get_xticklabels()[7].set_position((x, y-0.041))
+    ax.get_xticklabels()[26].set_position((x, y-0.041))
 
     x, y = ax.get_xticklabels()[9].get_position()
-    ax.get_xticklabels()[9].set_position((x, y-0.04))
-    ax.get_xticklabels()[24].set_position((x, y-0.04))
+    ax.get_xticklabels()[9].set_position((x, y-0.041))
+    ax.get_xticklabels()[24].set_position((x, y-0.041))
 
     # Function to fill an arch segment
     def fill_arch(start_angle, end_angle, lower, upper, arch_color, alpha):
@@ -635,9 +636,9 @@ def perform_clustering():
     plt.yticks([-4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0], color='k', size=12)
     plt.ylim(-5, 5)
     # plt.legend(loc='upper right', bbox_to_anchor=(-0.1, 0.1))
-    plt.title('More impaired leg', y=1.13, size=20)
+    plt.title('More impaired leg', y=1.15, size=24)
     plt.tight_layout()
-    plt.savefig(os.path.join(figures_path, 'Clustering/Spiderplot_Clusters_MI.png'), dpi=300)
+    plt.savefig(os.path.join(figures_path, 'Clustering/Spiderplot_Clusters_MI.png'), dpi=300, bbox_inches='tight')
     plt.close()
 
 
@@ -646,7 +647,7 @@ def perform_clustering():
     ax.set_theta_offset(0)
     ax.set_theta_direction(-1)
 
-    plt.xticks(angles[:-1], labels, size=14)
+    plt.xticks(angles[:-1], labels, size=16)
 
     colors = ['gray', 'darkgreen', 'darkorchid']
     columns = ['healthy range', 'cluster 1: less impaired leg', 'cluster 2: less impaired leg']
@@ -664,16 +665,16 @@ def perform_clustering():
 
     # Move the second label slightly to the left
     x, y = ax.get_xticklabels()[8].get_position()
-    ax.get_xticklabels()[8].set_position((x, y-0.1))
+    ax.get_xticklabels()[8].set_position((x, y-0.11))
     ax.get_xticklabels()[25].set_position((x, y-0.1))
 
     x, y = ax.get_xticklabels()[7].get_position()
-    ax.get_xticklabels()[7].set_position((x, y-0.04))
-    ax.get_xticklabels()[26].set_position((x, y-0.04))
+    ax.get_xticklabels()[7].set_position((x, y-0.041))
+    ax.get_xticklabels()[26].set_position((x, y-0.041))
 
     x, y = ax.get_xticklabels()[9].get_position()
-    ax.get_xticklabels()[9].set_position((x, y-0.04))
-    ax.get_xticklabels()[24].set_position((x, y-0.04))
+    ax.get_xticklabels()[9].set_position((x, y-0.041))
+    ax.get_xticklabels()[24].set_position((x, y-0.041))
 
     # Categorize parameters
     fill_arch(angles[0]-np.deg2rad(5), angles[5]-np.deg2rad(5), 4, 5, 'orange', 0.07)           # speed parameters
@@ -685,10 +686,10 @@ def perform_clustering():
     ax.set_rlabel_position(0)
     plt.yticks([-4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0], color='k', size=12)
     plt.ylim(-5, 5)
-    plt.legend(loc='upper right', bbox_to_anchor=(-0.15, 0.1), fontsize=14)
-    plt.title('Less impaired leg', y=1.13, size=20)
+    plt.legend(loc='upper right', bbox_to_anchor=(-0.2, 0.1), fontsize=18)
+    plt.title('Less impaired leg', y=1.15, size=24)
     plt.tight_layout()
-    plt.savefig(os.path.join(figures_path, 'Clustering/Spiderplot_Clusters_LI.png'), dpi=300)
+    plt.savefig(os.path.join(figures_path, 'Clustering/Spiderplot_Clusters_LI.png'), dpi=300, bbox_inches='tight')
     plt.close()
 
 
