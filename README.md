@@ -1,4 +1,4 @@
-# Quantification of lower limb kinematics during swimming in individuals with spinal cord injury [link to paper]
+# Quantification of lower limb kinematics during swimming in individuals with spinal cord injury
 
 🎯 Objectives: The aim of this project is to detect and analyze swimming patterns in individuals with spinal cord injury (SCI), with the objective to characterize motor deficits and enhance personalized rehabilitation.
 
