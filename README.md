@@ -50,7 +50,7 @@ To validate the sensor orientations against optical motion capture (VICON, Oxfor
 
 ## Data Analysis
 
-To perform a comprehensive analysis of the extracted swimming parameters (as included in the publication [publication link]) run `Scripts/src/analysis/run_analysis.py`. This script conducts statistical analyses, visualizes the data, and applies k-means clustering for pattern identification. Figures will be saved to `Figures` located in the pre-defined path (`Scripts/config.py`).
+To perform a comprehensive analysis of the extracted swimming parameters (as included in the publication) run `Scripts/src/analysis/run_analysis.py`. This script conducts statistical analyses, visualizes the data, and applies k-means clustering for pattern identification. Figures will be saved to `Figures` located in the pre-defined path (`Scripts/config.py`).
 
 ## Contact 
 
