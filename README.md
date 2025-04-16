@@ -15,7 +15,7 @@
 First, clone this project to your local environment.
 
 ```sh
-git clone https://github.com/melinagiagiozis/Swimming-Project-SCI.git
+git clone https://gitlab.ethz.ch/BMDSlab/publications/sci/sci-swimming-analysis
 ```
 Create a virtual environment with python 3.9.13.
 
